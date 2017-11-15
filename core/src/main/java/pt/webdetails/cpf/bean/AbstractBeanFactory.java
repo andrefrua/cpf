@@ -19,6 +19,7 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.File;
 import java.net.URL;
 
 public abstract class AbstractBeanFactory implements IBeanFactory {
@@ -56,7 +57,7 @@ public abstract class AbstractBeanFactory implements IBeanFactory {
       // important: use the plugin's classloader
       final ClassLoader cl = getClass().getClassLoader();
 
-      URL url = cl.getResource( config );
+      URL url = new File(config).toURI().toURL(); //cl.getResource( config );
       if ( url != null ) {
         getLogger().debug( "Found spring file @ " + url );
 
